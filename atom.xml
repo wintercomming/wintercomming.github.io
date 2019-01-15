@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-15T04:45:17.582Z</updated>
+  <updated>2019-01-15T06:23:28.663Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>动画相关总结</title>
+    <link href="http://yoursite.com/2019/01/15/%E5%8A%A8%E7%94%BB%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2019/01/15/动画相关总结/</id>
+    <published>2019-01-15T05:01:32.000Z</published>
+    <updated>2019-01-15T06:23:28.663Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="CSS动画"><a href="#CSS动画" class="headerlink" title="CSS动画"></a>CSS动画</h2><p> 随着CSS3和HTML5以及新时代移动端前端时代的来临，CSS3几乎成为了所有前端工程师必备的技能之一，而其中最核心也最常用的新特性之一便是CSS3动画了，这篇文章也是本人对于CSS动画的总结与思考</p><h3 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h3><p>这是一个在我印象中并不常用的JavaScript API,之所以放在最前面是因为其特殊特性在接下来的时间内值得好好运用<br>首先，我们需要了解重绘(repaint)、重排(relayout)、重组(recomposite)的概念:<br>1.重绘(repaint)<br>重绘定义:完成重排后，浏览器会重新绘制受影响的部分到屏幕，该过程称为重绘</p><p>重绘是以上三种方法中消耗性能最高的方式，所以在项目中应该尽量避免重绘，常用的有尽量使用webkit-transform: translateX(3em)的方案代替使用left: 3em ，因为left会触发重排(relayout)与重绘(repaint)，而webkit-transform只触发页面重组(recomposite)<br>2.重排(relayout)<br>重排，又称重构、回流<br>重排定义:当DOM的变化影响了元素的几何属性（宽或高），浏览器需要重新计算元素的几何属性，同样其他元素的几何属性和位置也会因此受到影响。浏览器会使渲染树中受到影响的部分失效，并重新构造渲染树。这个过程称为重排。<br>requestAnimationFrame主要用途是按帧对网页进行重绘，即每一帧都刷新一次，提高动画的流畅度</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;CSS动画&quot;&gt;&lt;a href=&quot;#CSS动画&quot; class=&quot;headerlink&quot; title=&quot;CSS动画&quot;&gt;&lt;/a&gt;CSS动画&lt;/h2&gt;&lt;p&gt; 随着CSS3和HTML5以及新时代移动端前端时代的来临，CSS3几乎成为了所有前端工程师必备的技能之一，而其中最核
+      
+    
+    </summary>
+    
+    
+      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
+    
+  </entry>
   
   <entry>
     <title>javascript的执行上下文与执行机制</title>
