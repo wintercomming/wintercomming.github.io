@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>javascript的执行上下文与执行机制 | wintercomming的博客 | 欢迎来到wintercomming技术博客之家</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="javascript基础">
+    <meta name="description" content="关于这个系列   javascript语言有很多奥秘，譬如其运行机制，内部原理，在历史的这一段日子里，它不仅带来了复杂的交互效果和充分的性能效益，而且吸引了越来越多的开发者加入其中，但是随着时间进程的发展，很多时候开发者们因为花样繁复的JS库与框架而忽略了JS本身的内部机制。无可厚非，这样做是增加了效率，但是随着Web的蓬勃发展和JS社区的踊跃贡献，JS的思想和创造年年翻新，现有的一切被淘汰也是时">
+<meta name="keywords" content="javascript基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript的执行上下文与执行机制">
+<meta property="og:url" content="http://yoursite.com/2019/01/15/javascript的执行上下文与执行机制/index.html">
+<meta property="og:site_name" content="wintercomming的博客">
+<meta property="og:description" content="关于这个系列   javascript语言有很多奥秘，譬如其运行机制，内部原理，在历史的这一段日子里，它不仅带来了复杂的交互效果和充分的性能效益，而且吸引了越来越多的开发者加入其中，但是随着时间进程的发展，很多时候开发者们因为花样繁复的JS库与框架而忽略了JS本身的内部机制。无可厚非，这样做是增加了效率，但是随着Web的蓬勃发展和JS社区的踊跃贡献，JS的思想和创造年年翻新，现有的一切被淘汰也是时">
+<meta property="og:locale" content="chinese">
+<meta property="og:image" content="http://yoursite.com/images/javascript事件机制.jpg">
+<meta property="og:updated_time" content="2019-01-15T04:30:28.025Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript的执行上下文与执行机制">
+<meta name="twitter:description" content="关于这个系列   javascript语言有很多奥秘，譬如其运行机制，内部原理，在历史的这一段日子里，它不仅带来了复杂的交互效果和充分的性能效益，而且吸引了越来越多的开发者加入其中，但是随着时间进程的发展，很多时候开发者们因为花样繁复的JS库与框架而忽略了JS本身的内部机制。无可厚非，这样做是增加了效率，但是随着Web的蓬勃发展和JS社区的踊跃贡献，JS的思想和创造年年翻新，现有的一切被淘汰也是时">
+<meta name="twitter:image" content="http://yoursite.com/images/javascript事件机制.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="wintercomming的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">mingjie yao</h5>
+          <a href="mailto:1156032282@qq.com" title="1156032282@qq.com" class="mail">1156032282@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                时间线
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wintercomming" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">javascript的执行上下文与执行机制</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">javascript的执行上下文与执行机制</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-01-15T04:11:08.000Z" itemprop="datePublished" class="page-time">
+  2019-01-15
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于这个系列"><span class="post-toc-number">1.</span> <span class="post-toc-text">关于这个系列</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#执行上下文"><span class="post-toc-number">2.</span> <span class="post-toc-text">执行上下文</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#执行栈"><span class="post-toc-number">3.</span> <span class="post-toc-text">执行栈</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-javascript的执行上下文与执行机制" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">javascript的执行上下文与执行机制</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-01-15 12:11:08" datetime="2019-01-15T04:11:08.000Z" itemprop="datePublished">2019-01-15</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="关于这个系列"><a href="#关于这个系列" class="headerlink" title="关于这个系列"></a>关于这个系列</h2><p>   javascript语言有很多奥秘，譬如其运行机制，内部原理，在历史的这一段日子里，它不仅带来了复杂的交互效果和充分的性能效益，而且吸引了越来越多的开发者加入其中，但是随着时间进程的发展，很多时候开发者们因为花样繁复的JS库与框架而忽略了JS本身的内部机制。无可厚非，这样做是增加了效率，但是随着Web的蓬勃发展和JS社区的踊跃贡献，JS的思想和创造年年翻新，现有的一切被淘汰也是时间的问题。所以开发者花费时间去研究其语言的内部机制是一个不被社会洪流淘汰的最佳选择，而本系列恰好记录了本人对于JS的理解和思考，会陆续将所学更新于此，希望对大家有所帮助。</p>
+<p>  受水平和技术有限，灵感和部分例子来自于Github里《JavaScript开发者应懂的33个概念》系列集合，有兴趣的可以在github里面找到这个合集查看完整的讲解。</p>
+<h2 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h2><p>  这是一个很难具体阐述的概念，而且绕口的文字也让很多人费解，我也很难阐述他究竟是个什么东西，为什么取了个这样的名字，但是我认为执行上下文就是javascript所运行的整个环境，它将整个js文件的一些段落或某一个段落包裹起来，分别执行，可以把它理解为某一段代码是在怎么样的一个地方去执行的，如果感觉非常费解，其实你可以把整个js文件比喻成一个房屋，房屋里面拥有着不同的居住环境，不信你可以看看执行上下文的种类在房屋内充当了什么样的位置：</p>
+<p>  1.全局执行上下文</p>
+<p>  全局执行上下文就是属于最外层的上下文，简单的说就是除了函数里面的上下文，初始化全局执行上下文的时候它会做两件事情，会创建一个window对象，并且把this指向window对象，整个全局环境都属于全局执行上下文的环境，怎么去理解呢？想象一下刚刚上面我所说的房屋，对于整个JS文件而言他就是整个房屋，而全局执行上下文就好像人所能够移动的区域，客厅，厨房和饭厅就像一段段代码，我们的浏览器或者node环境也就是查房员，他负责查房后汇报房间里拥有什么东西，直到从门口开始把每一个房间都走完。</p>
+<p>  2.函数执行上下文</p>
+<p>  函数执行上下文就是全局执行上下文所不能执行的地方，它往往存在与函数内部，全局在遇到这种环境时会避开它，就好像房间里的鱼缸，鸟窝，它们都是鱼和鸟活动的区域，在调用整个函数时，查房人就会往里面放上相应的动物，直到它们把整个环境走完以后再取出来，这些动物不仅有自己的语言，行为和动作，而鸟笼，鱼缸，狗窝它们大小也不一，当关上门时它们的世界就和整个房屋隔绝了开来，我们称这一些地方叫做函数执行上下文。</p>
+<p>  3.eval函数上下文</p>
+<p>  eval函数会将一段字符串当做JS代码来执行，而它自己也有属于自己的上下文，这就好像一个便携帐篷，在需要的时候把它在房屋里面打开，拥有了属于自己内部的区域；</p>
+<h2 id="执行栈"><a href="#执行栈" class="headerlink" title="执行栈"></a>执行栈</h2><p>  刚刚说了执行上下文的概念，但是不少人会注意到有一个缺陷，就是我们如何把鱼放入鱼缸，鸟放入鸟窝跑一个遍呢？或者说我鱼缸里面的虾窝，狗窝毛毯上的跳蚤窝又是怎么去查看的呢？其实这就引入了我们执行栈的概念；而管理员就是通过这个东西把它们放入对应的地方汇报信息的。</p>
+<p>  要搞懂执行栈，首先要理解栈是一个什么东西，有人会说栈是一种基本数据结构，先入先出，但本人就经常把队列和栈搞混(可能比较愚笨),但是笨有笨的方法，我可以想象，我把栈看成是军队训练时要爬的人墙，每次要爬山墙的人都是最后一个进入人墙，但是确实最先一个离开人墙，执行栈也是一样，全局执行上下文就相当于栈的底部，而每次执行到某个函数，其内部的函数上下文就会跳到全局的身上，执行完成便翻过这道墙，当然函数上下文里面的函数执行也是一样，他会跳到上一个函数上下文上边，这就形成了一个FQ的机制直到整个墙翻完为止。</p>
+<p>  对于常理来说，是这样，但是总有一些奇怪的人，想自己组成一个小团队，他们为了不影响别人，决定在大部队翻过墙以后再自己FQ，这些小团队有可能是一个人也有可能是几个人，而这就牵扯到了JS的异步</p>
+<p>异步<br>  异步是一个特殊的概念，在javascript中，整个语言的执行是单线程的，就是一次只能够做一次事情，而一些特殊的事情为了不影响其他事情的执行他们选择等待，当其他事情执行结束时他再去执行自己，一切都是这么的规范和有理，和现实中的混乱相距甚远；</p>
+<p>  而这一批有礼貌的事情是哪一些呢？</p>
+<p>  1.setTimeout 2.promise 3.事件绑定 4.ajax 5.回调函数</p>
+<p>  他们都很有礼貌，每次都会等到执行完成后再去执行自身，至少我之前是这么认为的；</p>
+<p>  慢慢的和他们相处长了以后，我发现，有一些伪君子，他们虽然也在最后执行，但是他们会插到所有有礼貌的人最前面，也就是说，他们在所有异步的成员里面首先执行，而这就牵扯到了微任务和宏任务的问题了</p>
+<p>  而微任务就是这一批伪君子，这使我不得不介绍一下他们：</p>
+<p>  micro-task(微任务)：Promise，process.nextTick，Object.observe</p>
+<p>  下面这张图是从掘金《这一次，彻底弄懂 JavaScript 执行机制》一文中copy所得，方便大家理解微任务和宏任务<br>  <img src="/images/javascript事件机制.jpg" alt="Alt text"><br>  此文到这里就结束了，相信大家也初步理解了机制，很多东西需要代码才能辅助理解，代码我会在之后补上，先告一段落</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-01-15T04:30:28.025Z" itemprop="dateUpdated">2019-01-15 12:30:28</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2019/01/15/javascript的执行上下文与执行机制/" target="_blank" rel="external">http://yoursite.com/2019/01/15/javascript的执行上下文与执行机制/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="mingjie yao">
+            mingjie yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript基础/">javascript基础</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/01/15/javascript的执行上下文与执行机制/&title=《javascript的执行上下文与执行机制》 — wintercomming的博客&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/01/15/javascript的执行上下文与执行机制/&title=《javascript的执行上下文与执行机制》 — wintercomming的博客&source=一个向全能努力的前端工程师" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/01/15/javascript的执行上下文与执行机制/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javascript的执行上下文与执行机制》 — wintercomming的博客&url=http://yoursite.com/2019/01/15/javascript的执行上下文与执行机制/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/01/15/javascript的执行上下文与执行机制/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/01/15/hello-world/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hello World</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>mingjie yao &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/01/15/javascript的执行上下文与执行机制/&title=《javascript的执行上下文与执行机制》 — wintercomming的博客&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/01/15/javascript的执行上下文与执行机制/&title=《javascript的执行上下文与执行机制》 — wintercomming的博客&source=一个向全能努力的前端工程师" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/01/15/javascript的执行上下文与执行机制/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javascript的执行上下文与执行机制》 — wintercomming的博客&url=http://yoursite.com/2019/01/15/javascript的执行上下文与执行机制/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/01/15/javascript的执行上下文与执行机制/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtklEQVR42u3aS27jQAwFQN//0gkwu0EszeOnrQxQWgWyLXX1osmQfL3i6+vPdX//68d19Z37799/83XiwsPDw2st/eq64iV37u/nT7taz/2a8fDw8E7zJof+/cGd/zYJIeWtxMPDw3uUlx/0ya+SrcHDw8P733nVwzrfoKQwgYeHh/fbeEmCmye+SRF265lrtRY8PDy8mDdJjp/6+2B/Dw8PD2/QVa82w3pNsmrptrBaPDw8vAO83hBANZ3tjWFV0/TLsIGHh4d3gDcprSaPnoeZeUEZDw8Pb5dXfeWk6fX50IKHh4e3y+uVIfJW02jXi0FrVGvBw8PDK/LyoahoyKmYFiepea9AjIeHh3eCVy0lTIq/Cb4aHvDw8PCe4p1bUD7ClZC23o6Hh4e3xau+oHkoBy2xeYEYDw8P75O83kBAdZig13ib3MfDw8M7x0vKrL2RqXxcIG93JUk5Hh4e3i5vt2C6O0yQN9jw8PDwnuLlx3T1EO8he4Hqr6fh4eHhHeP1hgCSckBviCr5NCrj4uHh4R3gTY7+arEgCQ95obYwgoCHh4d3jLfV/k/S37x9lTfhCkMDeHh4eANeUk7N2UlgqJZlqyt88x8DHh4e3iqvCqgGkjxpzkNIeYwADw8Pb5VXLSskhd3dLRsl33h4eHgP8e4LppMxqXnK/o/NxcPDwzvASw7Zaps/2Y7e6EBSsMDDw8M7zZsksvNQMWm/Rc/Hw8PDO8wbxZbWEV8NIXll+k1gwMPDw1vi9Q7feSkhGplqvbcZZvDw8PCKvN7AU5529477yahBIbHGw8PDG/DyUmxvrKpX5O2Ndr0JDHh4eHgP8apF27xw0Nu46D4eHh7er+H1jv5qEt9L8RcCAx4eHl7AmzefeluQJ83VzcLDw8M7x+s1wPKQ0FtWPqywcOHh4eGl1zcnpnOomOWeYAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'hey！别走~！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来~！';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
