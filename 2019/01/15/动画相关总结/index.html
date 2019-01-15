@@ -21,18 +21,18 @@
     
     
     <meta name="keywords" content="CSS">
-    <meta name="description" content="CSS动画 随着CSS3和HTML5以及新时代移动端前端时代的来临，CSS3几乎成为了所有前端工程师必备的技能之一，而其中最核心也最常用的新特性之一便是CSS3动画了，这篇文章也是本人对于CSS动画的总结与思考 requestAnimationFrame这是一个在我印象中并不常用的JavaScript API,之所以放在最前面是因为其特殊特性在接下来的时间内值得好好运用首先，我们需要了解重绘(re">
+    <meta name="description" content="CSS动画 随着CSS3和HTML5以及新时代移动端前端时代的来临，CSS3几乎成为了所有前端工程师必备的技能之一，而其中最核心也最常用的新特性之一便是CSS3动画了，这篇文章也是本人对于CSS动画的总结与思考 重绘(repaint)、重排(relayout)与重组(recomposite)首先，我们需要了解重绘(repaint)、重排(relayout)、重组(recomposite)的概念:最">
 <meta name="keywords" content="CSS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动画相关总结">
 <meta property="og:url" content="http://yoursite.com/2019/01/15/动画相关总结/index.html">
 <meta property="og:site_name" content="wintercomming的博客">
-<meta property="og:description" content="CSS动画 随着CSS3和HTML5以及新时代移动端前端时代的来临，CSS3几乎成为了所有前端工程师必备的技能之一，而其中最核心也最常用的新特性之一便是CSS3动画了，这篇文章也是本人对于CSS动画的总结与思考 requestAnimationFrame这是一个在我印象中并不常用的JavaScript API,之所以放在最前面是因为其特殊特性在接下来的时间内值得好好运用首先，我们需要了解重绘(re">
+<meta property="og:description" content="CSS动画 随着CSS3和HTML5以及新时代移动端前端时代的来临，CSS3几乎成为了所有前端工程师必备的技能之一，而其中最核心也最常用的新特性之一便是CSS3动画了，这篇文章也是本人对于CSS动画的总结与思考 重绘(repaint)、重排(relayout)与重组(recomposite)首先，我们需要了解重绘(repaint)、重排(relayout)、重组(recomposite)的概念:最">
 <meta property="og:locale" content="chinese">
-<meta property="og:updated_time" content="2019-01-15T06:48:53.652Z">
+<meta property="og:updated_time" content="2019-01-15T07:01:41.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动画相关总结">
-<meta name="twitter:description" content="CSS动画 随着CSS3和HTML5以及新时代移动端前端时代的来临，CSS3几乎成为了所有前端工程师必备的技能之一，而其中最核心也最常用的新特性之一便是CSS3动画了，这篇文章也是本人对于CSS动画的总结与思考 requestAnimationFrame这是一个在我印象中并不常用的JavaScript API,之所以放在最前面是因为其特殊特性在接下来的时间内值得好好运用首先，我们需要了解重绘(re">
+<meta name="twitter:description" content="CSS动画 随着CSS3和HTML5以及新时代移动端前端时代的来临，CSS3几乎成为了所有前端工程师必备的技能之一，而其中最核心也最常用的新特性之一便是CSS3动画了，这篇文章也是本人对于CSS动画的总结与思考 重绘(repaint)、重排(relayout)与重组(recomposite)首先，我们需要了解重绘(repaint)、重排(relayout)、重组(recomposite)的概念:最">
     
         <link rel="alternate" type="application/atom+xml" title="wintercomming的博客" href="/atom.xml">
     
@@ -119,7 +119,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -158,7 +158,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS动画"><span class="post-toc-number">1.</span> <span class="post-toc-text">CSS动画</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#requestAnimationFrame"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">requestAnimationFrame</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS动画"><span class="post-toc-number">1.</span> <span class="post-toc-text">CSS动画</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重绘-repaint-、重排-relayout-与重组-recomposite"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">重绘(repaint)、重排(relayout)与重组(recomposite)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#requestAnimationFrame"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">requestAnimationFrame</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -182,11 +182,12 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <h2 id="CSS动画"><a href="#CSS动画" class="headerlink" title="CSS动画"></a>CSS动画</h2><p> 随着CSS3和HTML5以及新时代移动端前端时代的来临，CSS3几乎成为了所有前端工程师必备的技能之一，而其中最核心也最常用的新特性之一便是CSS3动画了，这篇文章也是本人对于CSS动画的总结与思考</p>
-<h3 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h3><p>这是一个在我印象中并不常用的JavaScript API,之所以放在最前面是因为其特殊特性在接下来的时间内值得好好运用<br>首先，我们需要了解重绘(repaint)、重排(relayout)、重组(recomposite)的概念:<br>最常见的区别:<br>document.write:重排整个页面<br>innerHTML:重绘部分页面<br>1.重绘(repaint)<br>重绘定义:完成重排后，浏览器会重新绘制受影响的部分到屏幕，该过程称为重绘</p>
+<h3 id="重绘-repaint-、重排-relayout-与重组-recomposite"><a href="#重绘-repaint-、重排-relayout-与重组-recomposite" class="headerlink" title="重绘(repaint)、重排(relayout)与重组(recomposite)"></a>重绘(repaint)、重排(relayout)与重组(recomposite)</h3><p>首先，我们需要了解重绘(repaint)、重排(relayout)、重组(recomposite)的概念:<br>最常见的区别:<br>document.write:重排整个页面<br>innerHTML:重绘部分页面<br>1.重绘(repaint)<br>重绘定义:完成重排后，浏览器会重新绘制受影响的部分到屏幕，该过程称为重绘</p>
 <p>重绘是以上三种方法中消耗性能最高的方式，所以在项目中应该尽量避免重绘，常用的有尽量使用webkit-transform: translateX(3em)的方案代替使用left: 3em ，因为left会触发重排(relayout)与重绘(repaint)，而webkit-transform只触发页面重组(recomposite)</p>
-<p>2.重排(relayout)<br>重排，又称重构、回流</p>
+<p>当盒子的位置、大小以及其他属性，例如颜色、字体大小等都确定下来之后，浏览器便把这些原色都按照各自的特性绘制一遍，将内容呈现在页面上。重绘是指一个元素外观的改变所触发的浏览器行为，浏览器会根据元素的新属性重新绘制，使元素呈现新的外观。</p>
+<p>触发重绘的条件：改变元素外观属性。如：color，background-color等。</p>
 <p>重排定义:当DOM的变化影响了元素的几何属性（宽或高），浏览器需要重新计算元素的几何属性，同样其他元素的几何属性和位置也会因此受到影响。浏览器会使渲染树中受到影响的部分失效，并重新构造渲染树。这个过程称为重排。</p>
-<p>触发重排的条件：任何页面布局和几何属性的改变都会触发重排，比如：<br>　　1、页面渲染初始化；(无法避免)</p>
+<p>触发重排的条件：任何页面布局和几何属性的改变都会触发重排，比如:<br>　　1、页面渲染初始化；(无法避免)</p>
 <p>　　2、添加或删除可见的DOM元素；</p>
 <p>　　3、元素位置的改变，或者使用动画；</p>
 <p>　　4、元素尺寸的改变——大小，外边距，边框；</p>
@@ -194,6 +195,7 @@
 <p>　　6、填充内容的改变，比如文本的改变或图片大小改变而引起的计算值宽度和高度的改变；</p>
 <p>　　7、读取某些元素属性：（offsetLeft/Top/Height/Width,　clientTop/Left/Width/Height,　scrollTop/Left/Width/Height,　width/height,　getComputedStyle(),　currentStyle(IE)　)</p>
 <p>重排必定会引发重绘，但重绘不一定会引发重排。</p>
+<h3 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h3><p>这是一个在我印象中并不常用的JavaScript API,之所以放在最前面是因为其特殊特性在接下来的时间内值得好好运用</p>
 <p>requestAnimationFrame主要用途是按帧对网页进行重绘，即每一帧都刷新一次，提高动画的流畅度</p>
 
         </div>
@@ -203,7 +205,7 @@
     <div class="content">
         
 <span class="post-time">
-    最終更新：<time datetime="2019-01-15T06:48:53.652Z" itemprop="dateUpdated">2019-01-15 14:48:53</time>
+    Last updated: <time datetime="2019-01-15T07:01:41.363Z" itemprop="dateUpdated">2019-01-15 15:01:41</time>
 </span><br>
 
 
@@ -372,7 +374,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
