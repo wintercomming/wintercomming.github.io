@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-15T07:01:41.363Z</updated>
+  <updated>2019-01-16T03:12:40.282Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>诗歌闲谈（一）</title>
+    <link href="http://yoursite.com/2019/01/16/%E8%AF%97%E6%AD%8C%E9%97%B2%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/01/16/诗歌闲谈（一）/</id>
+    <published>2019-01-16T03:11:36.000Z</published>
+    <updated>2019-01-16T03:12:40.282Z</updated>
+    
+    <content type="html"><![CDATA[<p>《闲谈》<br>      ———wintercomming<br>待日月无光华，<br>望朝晚无弥霞。<br>却问，<br>你要去哪？</p><p>若心灵而不静，<br>似叶落而不停。<br>但曰，<br>我心空明。</p><p>念我心之空悠，<br>点流水之忧愁。<br>话是，<br>人道风流。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;《闲谈》&lt;br&gt;      ———wintercomming&lt;br&gt;待日月无光华，&lt;br&gt;望朝晚无弥霞。&lt;br&gt;却问，&lt;br&gt;你要去哪？&lt;/p&gt;
+&lt;p&gt;若心灵而不静，&lt;br&gt;似叶落而不停。&lt;br&gt;但曰，&lt;br&gt;我心空明。&lt;/p&gt;
+&lt;p&gt;念我心之空悠，&lt;br&gt;点流水之忧愁。&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="诗歌闲谈" scheme="http://yoursite.com/tags/%E8%AF%97%E6%AD%8C%E9%97%B2%E8%B0%88/"/>
+    
+  </entry>
+  
+  <entry>
     <title>动画相关总结</title>
     <link href="http://yoursite.com/2019/01/15/%E5%8A%A8%E7%94%BB%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/"/>
     <id>http://yoursite.com/2019/01/15/动画相关总结/</id>
     <published>2019-01-15T05:01:32.000Z</published>
-    <updated>2019-01-15T07:01:41.363Z</updated>
+    <updated>2019-01-15T15:18:46.868Z</updated>
     
     <content type="html"><![CDATA[<h2 id="CSS动画"><a href="#CSS动画" class="headerlink" title="CSS动画"></a>CSS动画</h2><p> 随着CSS3和HTML5以及新时代移动端前端时代的来临，CSS3几乎成为了所有前端工程师必备的技能之一，而其中最核心也最常用的新特性之一便是CSS3动画了，这篇文章也是本人对于CSS动画的总结与思考</p><h3 id="重绘-repaint-、重排-relayout-与重组-recomposite"><a href="#重绘-repaint-、重排-relayout-与重组-recomposite" class="headerlink" title="重绘(repaint)、重排(relayout)与重组(recomposite)"></a>重绘(repaint)、重排(relayout)与重组(recomposite)</h3><p>首先，我们需要了解重绘(repaint)、重排(relayout)、重组(recomposite)的概念:<br>最常见的区别:<br>document.write:重排整个页面<br>innerHTML:重绘部分页面<br>1.重绘(repaint)<br>重绘定义:完成重排后，浏览器会重新绘制受影响的部分到屏幕，该过程称为重绘</p><p>重绘是以上三种方法中消耗性能最高的方式，所以在项目中应该尽量避免重绘，常用的有尽量使用webkit-transform: translateX(3em)的方案代替使用left: 3em ，因为left会触发重排(relayout)与重绘(repaint)，而webkit-transform只触发页面重组(recomposite)</p><p>当盒子的位置、大小以及其他属性，例如颜色、字体大小等都确定下来之后，浏览器便把这些原色都按照各自的特性绘制一遍，将内容呈现在页面上。重绘是指一个元素外观的改变所触发的浏览器行为，浏览器会根据元素的新属性重新绘制，使元素呈现新的外观。</p><p>触发重绘的条件：改变元素外观属性。如：color，background-color等。</p><p>重排定义:当DOM的变化影响了元素的几何属性（宽或高），浏览器需要重新计算元素的几何属性，同样其他元素的几何属性和位置也会因此受到影响。浏览器会使渲染树中受到影响的部分失效，并重新构造渲染树。这个过程称为重排。</p><p>触发重排的条件：任何页面布局和几何属性的改变都会触发重排，比如:<br>　　1、页面渲染初始化；(无法避免)</p><p>　　2、添加或删除可见的DOM元素；</p><p>　　3、元素位置的改变，或者使用动画；</p><p>　　4、元素尺寸的改变——大小，外边距，边框；</p><p>　　5、浏览器窗口尺寸的变化（resize事件发生时）；</p><p>　　6、填充内容的改变，比如文本的改变或图片大小改变而引起的计算值宽度和高度的改变；</p><p>　　7、读取某些元素属性：（offsetLeft/Top/Height/Width,　clientTop/Left/Width/Height,　scrollTop/Left/Width/Height,　width/height,　getComputedStyle(),　currentStyle(IE)　)</p><p>重排必定会引发重绘，但重绘不一定会引发重排。</p><h3 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h3><p>这是一个在我印象中并不常用的JavaScript API,之所以放在最前面是因为其特殊特性在接下来的时间内值得好好运用</p><p>requestAnimationFrame主要用途是按帧对网页进行重绘，即每一帧都刷新一次，提高动画的流畅度</p>]]></content>
     
