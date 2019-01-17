@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="wintercomming的博客">
 <meta property="og:description" content="CSS动画 随着CSS3和HTML5以及新时代移动端前端时代的来临，CSS3几乎成为了所有前端工程师必备的技能之一，而其中最核心也最常用的新特性之一便是CSS3动画了，这篇文章也是本人对于CSS动画的总结与思考 重绘(repaint)、重排(relayout)与重组(recomposite)首先，我们需要了解重绘(repaint)、重排(relayout)、重组(recomposite)的概念:最">
 <meta property="og:locale" content="chinese">
-<meta property="og:updated_time" content="2019-01-15T15:18:46.868Z">
+<meta property="og:updated_time" content="2019-01-17T09:09:49.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动画相关总结">
 <meta name="twitter:description" content="CSS动画 随着CSS3和HTML5以及新时代移动端前端时代的来临，CSS3几乎成为了所有前端工程师必备的技能之一，而其中最核心也最常用的新特性之一便是CSS3动画了，这篇文章也是本人对于CSS动画的总结与思考 重绘(repaint)、重排(relayout)与重组(recomposite)首先，我们需要了解重绘(repaint)、重排(relayout)、重组(recomposite)的概念:最">
@@ -158,7 +158,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS动画"><span class="post-toc-number">1.</span> <span class="post-toc-text">CSS动画</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重绘-repaint-、重排-relayout-与重组-recomposite"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">重绘(repaint)、重排(relayout)与重组(recomposite)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#requestAnimationFrame"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">requestAnimationFrame</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS动画"><span class="post-toc-number">1.</span> <span class="post-toc-text">CSS动画</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重绘-repaint-、重排-relayout-与重组-recomposite"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">重绘(repaint)、重排(relayout)与重组(recomposite)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#requestAnimationFrame"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">requestAnimationFrame</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#transition-过渡-动画"><span class="post-toc-number">2.</span> <span class="post-toc-text">transition(过渡)动画</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#animation动画"><span class="post-toc-number">3.</span> <span class="post-toc-text">animation动画</span></a></li></ol>
         </nav>
     </aside>
 
@@ -195,8 +195,21 @@
 <p>　　6、填充内容的改变，比如文本的改变或图片大小改变而引起的计算值宽度和高度的改变；</p>
 <p>　　7、读取某些元素属性：（offsetLeft/Top/Height/Width,　clientTop/Left/Width/Height,　scrollTop/Left/Width/Height,　width/height,　getComputedStyle(),　currentStyle(IE)　)</p>
 <p>重排必定会引发重绘，但重绘不一定会引发重排。</p>
-<h3 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h3><p>这是一个在我印象中并不常用的JavaScript API,之所以放在最前面是因为其特殊特性在接下来的时间内值得好好运用</p>
+<h3 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h3><p>这是一个在我印象中并不常用的JavaScript API,之所以放在这里是因为其特殊特性在接下来的时间内值得好好运用</p>
 <p>requestAnimationFrame主要用途是按帧对网页进行重绘，即每一帧都刷新一次，提高动画的流畅度</p>
+<p>以下是此api的使用及兼容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">window.requestAnimFrame=(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    <span class="built_in">return</span> window.requestAnimationFrame||</span><br><span class="line">           window.webkitRequestAnimationFrame||</span><br><span class="line">           window.mozRequestAnimationFrame||</span><br><span class="line">           window.oRequestAnimationFrame||</span><br><span class="line">           window.msRequestAnimationFrame||</span><br><span class="line">           <span class="keyword">function</span>(callback)&#123;</span><br><span class="line">               window.setTimeout(callback,1000/60) //适应刷新频率为60hz的屏幕</span><br><span class="line">           &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>上面的函数内最后一个选项是为了兼容ie浏览器所返回的对应的函数，不过此方法有一个缺陷，就是无法适应不同频率的屏幕，无法达到对应屏幕的理想帧数<br>另外值得注意的是，W3C认为requestAnimationFrame是一个宏任务(marcotask),在实际运用中要注意</p>
+<h2 id="transition-过渡-动画"><a href="#transition-过渡-动画" class="headerlink" title="transition(过渡)动画"></a>transition(过渡)动画</h2><p>transition(过渡)是CSS3动画规范内的一种</p>
+<p>如:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">img&#123;</span><br><span class="line">    height:100px;</span><br><span class="line">    trasition: 1s 1s height ease;</span><br><span class="line">&#125;</span><br><span class="line">img:hover&#123;</span><br><span class="line">height:300px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>也就是说，规定了transition动画的元素上对其样式进行的修改都会变成以动画的形式</p>
+<p>transition也有其局限性</p>
+<p>1.transition需要事件触发，无法像@keyframe一样自动播放<br>2.transition是一次性的，无法自动重复发生，<br>3.transition只能定义开始状态和结束状态，也就是说，用transition无法创建有多个过渡状态的复杂动画<br>4.一条transition,只能定义一个属性的变化</p>
+<p>小技巧：显然，通过以上描述，transition可以归结为制作简单动画的首选，而不负众望，其性能尤其是在移动端上的性能尤为可观，大大提高了用户体验，所以在制作简单动画的过程中尽量使用transition。</p>
+<p>使用transition的另一个好处是可以通过js来控制动画，具体可以观看之前在百度IFE上的博文:<a href="http://ife.baidu.com/note/detail/id/2478&quot;博文地址&quot;" target="_blank" rel="noopener">博文地址</a></p>
+<h2 id="animation动画"><a href="#animation动画" class="headerlink" title="animation动画"></a>animation动画</h2><p>animation使用@keyframe来定义动画，最后绑定在对应元素的样式上来产生效果，如:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@keyframe move&#123;</span><br><span class="line">    0% &#123;</span><br><span class="line">        width:200px;</span><br><span class="line">    &#125;</span><br><span class="line">    50% &#123;</span><br><span class="line">        width:100px;</span><br><span class="line">    &#125;</span><br><span class="line">    100%&#123;</span><br><span class="line">        width:200px;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">div&#123;</span><br><span class="line">    width:100px;</span><br><span class="line">&#125;</span><br><span class="line">div:hover&#123;</span><br><span class="line">    animation:1s move</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>animation动画的内容更为丰富，可以用animation-delay规定动画何时开始，animation-iteration-count规定动画播放次数，animation-play-state规定动画当前应该状态</p>
 
         </div>
 
@@ -205,7 +218,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-01-15T15:18:46.868Z" itemprop="dateUpdated">2019-01-15 23:18:46</time>
+    Last updated: <time datetime="2019-01-17T09:09:49.463Z" itemprop="dateUpdated">2019-01-17 17:09:49</time>
 </span><br>
 
 
