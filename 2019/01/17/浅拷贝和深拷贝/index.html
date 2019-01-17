@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="wintercomming的博客">
 <meta property="og:description" content="什么是浅拷贝？什么是深拷贝？首先介绍一下浅拷贝:在javascript的实际运用中经常会出现以下问题:有一个对象，我们将其值赋给了另一个对象，如下:12345let Obj = &amp;#123;   name:&apos;james&apos;,   age:18,&amp;#125;let Obj2 = Obj; 看起来没什么问题，但是当我们对Obj进行改动的时候Obj2也会对应的进行改变，在一些业务逻辑中我们常常会需要解决这">
 <meta property="og:locale" content="chinese">
-<meta property="og:updated_time" content="2019-01-17T03:54:38.353Z">
+<meta property="og:updated_time" content="2019-01-17T03:56:02.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅拷贝和深拷贝">
 <meta name="twitter:description" content="什么是浅拷贝？什么是深拷贝？首先介绍一下浅拷贝:在javascript的实际运用中经常会出现以下问题:有一个对象，我们将其值赋给了另一个对象，如下:12345let Obj = &amp;#123;   name:&apos;james&apos;,   age:18,&amp;#125;let Obj2 = Obj; 看起来没什么问题，但是当我们对Obj进行改动的时候Obj2也会对应的进行改变，在一些业务逻辑中我们常常会需要解决这">
@@ -158,7 +158,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是浅拷贝？什么是深拷贝？"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是浅拷贝？什么是深拷贝？</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是浅拷贝？什么是深拷贝？"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是浅拷贝？什么是深拷贝？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如何浅拷贝"><span class="post-toc-number">2.</span> <span class="post-toc-text">如何浅拷贝</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如何深拷贝"><span class="post-toc-number">3.</span> <span class="post-toc-text">如何深拷贝</span></a></li></ol>
         </nav>
     </aside>
 
@@ -186,11 +186,9 @@
 <p>但是浅拷贝也不是万能的<br>例如遇到如下情况:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> Obj = &#123;</span><br><span class="line">   name:<span class="string">'james'</span>,</span><br><span class="line">   age:18,</span><br><span class="line">   todo:&#123;</span><br><span class="line">       wash:<span class="string">'room'</span>,</span><br><span class="line">       eat:<span class="string">'dinner'</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> Obj2 = Obj;</span><br></pre></td></tr></table></figure>
 <p>这个时候浅拷贝就不是可靠的了，当我们改动浅拷贝后的Obj2中的todo属性，会发现Obj会相应的改变，这个时候就需要深拷贝了<br>即当对象内还有属性是对象时，对其进行深拷贝才能解决刚才的问题</p>
-<p>##如何浅拷贝</p>
-<p>1.使用Object.assign来解决这个问题。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> Obj = &#123;</span><br><span class="line">   name:<span class="string">'james'</span>,</span><br><span class="line">   age:18,</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> Obj1 = Object.assign(&#123;&#125;,Obj);</span><br><span class="line"><span class="built_in">let</span> Obj2 = Obj1;</span><br></pre></td></tr></table></figure></p>
+<h2 id="如何浅拷贝"><a href="#如何浅拷贝" class="headerlink" title="如何浅拷贝"></a>如何浅拷贝</h2><p>1.使用Object.assign来解决这个问题。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> Obj = &#123;</span><br><span class="line">   name:<span class="string">'james'</span>,</span><br><span class="line">   age:18,</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> Obj1 = Object.assign(&#123;&#125;,Obj);</span><br><span class="line"><span class="built_in">let</span> Obj2 = Obj1;</span><br></pre></td></tr></table></figure></p>
 <p>2.使用es6的展开运算符(…)来解决问题.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> Obj = &#123;</span><br><span class="line">   name:<span class="string">'james'</span>,</span><br><span class="line">   age:18,</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> Obj2 = ...Obj1;</span><br></pre></td></tr></table></figure></p>
-<p>##如何深拷贝</p>
-<p>通常可以用JSON.parse(JSON.stringify(object))来解决这个问题</p>
+<h2 id="如何深拷贝"><a href="#如何深拷贝" class="headerlink" title="如何深拷贝"></a>如何深拷贝</h2><p>通常可以用JSON.parse(JSON.stringify(object))来解决这个问题</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> Obj = &#123;</span><br><span class="line">   name:<span class="string">'james'</span>,</span><br><span class="line">   age:18,</span><br><span class="line">   todo:&#123;</span><br><span class="line">       wash:<span class="string">'room'</span>,</span><br><span class="line">       eat:<span class="string">'dinner'</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> Obj2 = JSON.parse(JSON.stringify(Obj));</span><br></pre></td></tr></table></figure>
 <p>该方法虽然简便，但是有弊端<br>1.会忽略 undefined<br>2.会忽略 symbol<br>3.不能序列化函数<br>4.不能解决循环引用的对象</p>
 <p>遇到以上情况时，就可以使用其他的方法，因为上面方法是最简便的，所以一般优先考虑上一个方法</p>
@@ -205,7 +203,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-01-17T03:54:38.353Z" itemprop="dateUpdated">2019-01-17 11:54:38</time>
+    Last updated: <time datetime="2019-01-17T03:56:02.301Z" itemprop="dateUpdated">2019-01-17 11:56:02</time>
 </span><br>
 
 
