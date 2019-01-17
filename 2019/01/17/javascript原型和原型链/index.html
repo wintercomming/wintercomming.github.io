@@ -21,19 +21,19 @@
     
     
     <meta name="keywords" content="javascript基础">
-    <meta name="description" content="原型链">
+    <meta name="description" content="首先先看一张图:                                                                                             原型链              原型链是什么？原型是什么？在我的理解中，原型链是javascript的一种语言机制所产生的内部结构，这种内部结构不仅实现了内部的一些方法和属性的继承，而且明确了构造">
 <meta name="keywords" content="javascript基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="javascript原型和原型链">
 <meta property="og:url" content="http://yoursite.com/2019/01/17/javascript原型和原型链/index.html">
 <meta property="og:site_name" content="wintercomming的博客">
-<meta property="og:description" content="原型链">
+<meta property="og:description" content="首先先看一张图:                                                                                             原型链              原型链是什么？原型是什么？在我的理解中，原型链是javascript的一种语言机制所产生的内部结构，这种内部结构不仅实现了内部的一些方法和属性的继承，而且明确了构造">
 <meta property="og:locale" content="chinese">
 <meta property="og:image" content="http://yoursite.com/img/原型链.png">
-<meta property="og:updated_time" content="2019-01-17T01:49:59.847Z">
+<meta property="og:updated_time" content="2019-01-17T02:55:22.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript原型和原型链">
-<meta name="twitter:description" content="原型链">
+<meta name="twitter:description" content="首先先看一张图:                                                                                             原型链              原型链是什么？原型是什么？在我的理解中，原型链是javascript的一种语言机制所产生的内部结构，这种内部结构不仅实现了内部的一些方法和属性的继承，而且明确了构造">
 <meta name="twitter:image" content="http://yoursite.com/img/原型链.png">
     
         <link rel="alternate" type="application/atom+xml" title="wintercomming的博客" href="/atom.xml">
@@ -157,6 +157,13 @@
 
 <div class="container body-wrap">
     
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原型链是什么？原型是什么？"><span class="post-toc-number">1.</span> <span class="post-toc-text">原型链是什么？原型是什么？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原型链的规则"><span class="post-toc-number">2.</span> <span class="post-toc-text">原型链的规则</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#鸡生蛋？蛋生鸡？"><span class="post-toc-number">3.</span> <span class="post-toc-text">鸡生蛋？蛋生鸡？</span></a></li></ol>
+        </nav>
+    </aside>
+
 
 <article id="post-javascript原型和原型链" class="post-article article-type-post fade" itemprop="blogPost">
 
@@ -176,13 +183,19 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <figure class="image-bubble">
+            <p>首先先看一张图:<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="\img\原型链.png" alt="原型链" title="">
                 </div>
                 <div class="image-caption">原型链</div>
-            </figure>
+            </figure></p>
+<h2 id="原型链是什么？原型是什么？"><a href="#原型链是什么？原型是什么？" class="headerlink" title="原型链是什么？原型是什么？"></a>原型链是什么？原型是什么？</h2><p>在我的理解中，原型链是javascript的一种语言机制所产生的内部结构，这种内部结构不仅实现了内部的一些方法和属性的继承，而且明确了构造函数和实例的关系，同时它也带来了一些不必要的麻烦，原型则是用于实现原型链的中间产物，而作为一个经常与javascript打交道的前端工程师来说，理解其特性的运用和原理是必不可少的。</p>
+<h2 id="原型链的规则"><a href="#原型链的规则" class="headerlink" title="原型链的规则"></a>原型链的规则</h2><p>作为一种语言的内部机制，自然有自己的一套内部准则，我把它归纳为以下几点:</p>
+<p>1、每一个构造函数都有自己的prototype(显式原型)属性，指向一个普通对象<br>2、每一个实例都有自己的<strong>proto</strong>(隐式原型)属性，指向内部的[[proto]],最终也指向其构造函数的prototype.<br>3、原型也可以拥有自己的属性，可以用自己的constractor属性指回相应的构造函数</p>
+<p>这三条规则规定了原型链的运作规则</p>
+<h2 id="鸡生蛋？蛋生鸡？"><a href="#鸡生蛋？蛋生鸡？" class="headerlink" title="鸡生蛋？蛋生鸡？"></a>鸡生蛋？蛋生鸡？</h2><p>不过若是细心的话，可以发现上面的图里面还有一个function.prototype，那是因为所有的函数都是由Function构造函数所创建的实例，而奇怪的是，图中的Function构造函数的<strong>proto</strong>与prototype所指向的是同一个对象，这就存在疑惑了，难道Function的构造函数是其自身？<br>实际上并不是，javascript环境初始化时，会自动创建Function和Object，并不会存在鸡生蛋，蛋生鸡的问题</p>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -190,7 +203,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-01-17T01:49:59.847Z" itemprop="dateUpdated">2019-01-17 09:49:59</time>
+    Last updated: <time datetime="2019-01-17T02:55:22.336Z" itemprop="dateUpdated">2019-01-17 10:55:22</time>
 </span><br>
 
 
