@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-17T07:58:48.311Z</updated>
+  <updated>2019-01-18T12:57:51.577Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数组迭代方法总结</title>
+    <link href="http://yoursite.com/2019/01/18/%E6%95%B0%E7%BB%84%E8%BF%AD%E4%BB%A3%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2019/01/18/数组迭代方法总结/</id>
+    <published>2019-01-18T12:49:30.000Z</published>
+    <updated>2019-01-18T12:57:51.577Z</updated>
+    
+    <content type="html"><![CDATA[<p>话不多说，一图搞定！！</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="\img\数组迭代方法.png" alt="数组迭代方法" title="">                </div>                <div class="image-caption">数组迭代方法</div>            </figure><p>上面是数组的一些高阶函数，有很多妙用，让我记忆深刻的是之前灯南学长的reduce和indexOf &amp; lastindexOf实现数组去重，在以后的工作和学习中若遇到其他巧妙地运用方法会将其整理于此</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;话不多说，一图搞定！！&lt;/p&gt;
+&lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div class=&quot;img-lightbox&quot;&gt;
+                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="javascript基础" scheme="http://yoursite.com/tags/javascript%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>前端跨域</title>
