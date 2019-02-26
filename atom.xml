@@ -106,12 +106,21 @@
     <link href="http://yoursite.com/2019/01/17/DOM%E6%A0%91%E5%92%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/"/>
     <id>http://yoursite.com/2019/01/17/DOM树和浏览器渲染机制/</id>
     <published>2019-01-17T07:19:11.000Z</published>
-    <updated>2019-02-26T07:39:32.336Z</updated>
+    <updated>2019-02-26T08:16:20.850Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="了解浏览器有什么作用？"><a href="#了解浏览器有什么作用？" class="headerlink" title="了解浏览器有什么作用？"></a>了解浏览器有什么作用？</h2><p>在网页开发的长期过程中，浏览器对于大部分WEB开发者就好似黑盒子一般的存在，很少有人注意到这方面的问题，直到近些年代码的开放、性能优化的需求、网页知识链的扩增才渐渐让开发者注意到了浏览器内部的问题，不过对于大部分初学者可能还是对此知之甚少。</p><p>实际上经过一些顶尖开发者的努力，发现了浏览器不少的问题和运行机制，不过今天我们讲讲最基本的浏览器知识，那就是渲染机制</p><h2 id="浏览器内核"><a href="#浏览器内核" class="headerlink" title="浏览器内核"></a>浏览器内核</h2><p>这个问题其实在很久之前就开始讨论，由于浏览器的内核不同也让众多开发者脑子隐隐作痛，IE6 7 8的适配成为前端工作者的一个噩梦，许多人闻之色变.</p><p>最近微软也是宣布将放弃IE，开发者拍手叫好，同时也代表前端技术统一的时代会加速来临，一直以来不成体系的知识是初级开发者难以提升的难点之一</p><p>话说回来，浏览器的内核主要分为几种 chrome的WebKit内核(著名的V8是其中一部分) firefox的Gecko内核 微软的Trident内核 Chromium(用 electron开发)的BLINK内核</p><p>这对了解渲染机制很重要，因为首先你要清楚他是用什么实现的</p><h2 id="内核如何渲染"><a href="#内核如何渲染" class="headerlink" title="内核如何渲染"></a>内核如何渲染</h2><p>实际上，内核是一个大的说法，我们知道，浏览器的一个tab页面就是一个进程(当然也不一定，存在一定特殊情况)</p>]]></content>
     
     <summary type="html">
     
+      
+      
+        &lt;h2 id=&quot;了解浏览器有什么作用？&quot;&gt;&lt;a href=&quot;#了解浏览器有什么作用？&quot; class=&quot;headerlink&quot; title=&quot;了解浏览器有什么作用？&quot;&gt;&lt;/a&gt;了解浏览器有什么作用？&lt;/h2&gt;&lt;p&gt;在网页开发的长期过程中，浏览器对于大部分WEB开发者就好似黑盒子一般
+      
+    
     </summary>
     
+    
+      <category term="浏览器" scheme="http://yoursite.com/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
     
   </entry>
   
