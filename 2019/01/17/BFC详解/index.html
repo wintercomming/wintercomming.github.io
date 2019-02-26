@@ -20,19 +20,19 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="">
-    <meta name="description" content="一个向全能努力的前端工程师">
-<meta name="keywords" content="smart">
+    <meta name="keywords" content="CSS">
+    <meta name="description" content="##什么是BFC从英文释义上来讲 BFC = block-level box(块级盒子) + Formatting Contextblock-level box便不用介绍了，众所周知盒子分为block box(块级元素) ，inline box(行内元素)和 inline-block box(同时拥有block可以定义宽高的特性和inline不换行的特性)三种，各有其不同特性。Formatting">
+<meta name="keywords" content="CSS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BFC详解">
 <meta property="og:url" content="http://yoursite.com/2019/01/17/BFC详解/index.html">
 <meta property="og:site_name" content="wintercomming的博客">
-<meta property="og:description" content="一个向全能努力的前端工程师">
+<meta property="og:description" content="##什么是BFC从英文释义上来讲 BFC = block-level box(块级盒子) + Formatting Contextblock-level box便不用介绍了，众所周知盒子分为block box(块级元素) ，inline box(行内元素)和 inline-block box(同时拥有block可以定义宽高的特性和inline不换行的特性)三种，各有其不同特性。Formatting">
 <meta property="og:locale" content="chinese">
-<meta property="og:updated_time" content="2019-01-17T07:13:57.642Z">
+<meta property="og:updated_time" content="2019-02-26T07:28:21.184Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BFC详解">
-<meta name="twitter:description" content="一个向全能努力的前端工程师">
+<meta name="twitter:description" content="##什么是BFC从英文释义上来讲 BFC = block-level box(块级盒子) + Formatting Contextblock-level box便不用介绍了，众所周知盒子分为block box(块级元素) ，inline box(行内元素)和 inline-block box(同时拥有block可以定义宽高的特性和inline不换行的特性)三种，各有其不同特性。Formatting">
     
         <link rel="alternate" type="application/atom+xml" title="wintercomming的博客" href="/atom.xml">
     
@@ -174,7 +174,18 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            
+            <p>##什么是BFC<br>从英文释义上来讲 BFC = block-level box(块级盒子) + Formatting Context<br>block-level box便不用介绍了，众所周知盒子分为block box(块级元素) ，inline box(行内元素)和 inline-block box(同时拥有block可以定义宽高的特性和inline不换行的特性)三种，各有其不同特性。<br>Formatting Context则是CSS2.1的一种规范，这种规范决定了子元素布局和元素与其他元素的关系，BFC只是其中的一种，除了BFC还有IFC，FFC(flex布局)和GFC(grid布局)<br>所以很多人将BFC翻译为：块级格式化上下文</p>
+<p>##如何形成一个BFC<br>满足下列条件中至少一项，即可触发 BFC：</p>
+<p>1.float 的值不为none。</p>
+<p>2.position 的值不为static或者relative。</p>
+<p>3.display的值为 table-cell, table-caption, inline-block, flex, 或者 inline-flex中的其中一个。</p>
+<p>4.overflow的值不为visible。</p>
+<p>##BFC能干什么？<br>1.边距重叠(也称margin 重叠)<br>正常的盒子规则中，上下盒子都有margin的话，距离并非两者margin相加，而是算为两个盒子最大margin值，这个时候就会出现margin重叠问题。<br>边距重叠会带来布局上的困扰，如果你是用margin来让元素之间保持距离的话，BFC就能帮上大忙了</p>
+<p>两个块元素要产生折叠现象，必须满足一个必备条件：这两个元素的 margin 必须是 相邻 的；那么如果定义相邻呢，w3c 规范，两个 margin 是邻接的必须满足以下条件：</p>
+<p>必须是处于常规文档流（非float和绝对定位）的块级盒子,并且处于同一个 BFC 当中。</p>
+<p>没有inline盒子，没有空隙，没有 padding 和 border 将他们分隔开。</p>
+<p>都属于垂直方向上相邻的外边距。<br>2.清除内部浮动<br>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。<br>这是BFC其中的一个规范，我们知道，float浮动会使元素脱离常规文档流，往往使布局变得不可控，但是我们可以将其父级盒子变成BFC，这样子元素则会相对于父元素内部浮动，而不会影响外面的元素了</p>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -182,7 +193,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-01-17T07:13:57.642Z" itemprop="dateUpdated">2019-01-17 15:13:57</time>
+    Last updated: <time datetime="2019-02-26T07:28:21.184Z" itemprop="dateUpdated">2019-02-26 15:28:21</time>
 </span><br>
 
 
@@ -208,6 +219,8 @@
 
         <div class="post-footer">
             
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+
 
             
 <div class="page-share-wrap">
