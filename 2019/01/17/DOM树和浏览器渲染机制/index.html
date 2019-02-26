@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="wintercomming的博客">
 <meta property="og:description" content="了解浏览器有什么作用？在网页开发的长期过程中，浏览器对于大部分WEB开发者就好似黑盒子一般的存在，很少有人注意到这方面的问题，直到近些年代码的开放、性能优化的需求、网页知识链的扩增才渐渐让开发者注意到了浏览器内部的问题，不过对于大部分初学者可能还是对此知之甚少。 实际上经过一些顶尖开发者的努力，发现了浏览器不少的问题和运行机制，不过今天我们讲讲最基本的浏览器知识，那就是渲染机制 浏览器内核这个问题">
 <meta property="og:locale" content="chinese">
-<meta property="og:updated_time" content="2019-02-26T08:16:20.850Z">
+<meta property="og:updated_time" content="2019-02-26T08:37:58.116Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DOM树和浏览器渲染机制">
 <meta name="twitter:description" content="了解浏览器有什么作用？在网页开发的长期过程中，浏览器对于大部分WEB开发者就好似黑盒子一般的存在，很少有人注意到这方面的问题，直到近些年代码的开放、性能优化的需求、网页知识链的扩增才渐渐让开发者注意到了浏览器内部的问题，不过对于大部分初学者可能还是对此知之甚少。 实际上经过一些顶尖开发者的努力，发现了浏览器不少的问题和运行机制，不过今天我们讲讲最基本的浏览器知识，那就是渲染机制 浏览器内核这个问题">
@@ -158,7 +158,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#了解浏览器有什么作用？"><span class="post-toc-number">1.</span> <span class="post-toc-text">了解浏览器有什么作用？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#浏览器内核"><span class="post-toc-number">2.</span> <span class="post-toc-text">浏览器内核</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内核如何渲染"><span class="post-toc-number">3.</span> <span class="post-toc-text">内核如何渲染</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#了解浏览器有什么作用？"><span class="post-toc-number">1.</span> <span class="post-toc-text">了解浏览器有什么作用？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#浏览器内核"><span class="post-toc-number">2.</span> <span class="post-toc-text">浏览器内核</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内核如何渲染"><span class="post-toc-number">3.</span> <span class="post-toc-text">内核如何渲染</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结语"><span class="post-toc-number">4.</span> <span class="post-toc-text">结语</span></a></li></ol>
         </nav>
     </aside>
 
@@ -187,7 +187,11 @@
 <p>最近微软也是宣布将放弃IE，开发者拍手叫好，同时也代表前端技术统一的时代会加速来临，一直以来不成体系的知识是初级开发者难以提升的难点之一</p>
 <p>话说回来，浏览器的内核主要分为几种 chrome的WebKit内核(著名的V8是其中一部分) firefox的Gecko内核 微软的Trident内核 Chromium(用 electron开发)的BLINK内核</p>
 <p>这对了解渲染机制很重要，因为首先你要清楚他是用什么实现的</p>
-<h2 id="内核如何渲染"><a href="#内核如何渲染" class="headerlink" title="内核如何渲染"></a>内核如何渲染</h2><p>实际上，内核是一个大的说法，我们知道，浏览器的一个tab页面就是一个进程(当然也不一定，存在一定特殊情况)</p>
+<h2 id="内核如何渲染"><a href="#内核如何渲染" class="headerlink" title="内核如何渲染"></a>内核如何渲染</h2><p>实际上，内核是一个大的说法，我们知道，浏览器的一个tab页面就是一个进程(当然也不一定，存在一定特殊情况，如多个空白页面)，当一个tab页面被打开时就代表一个浏览器引擎开始运作，我们在服务器获取资源后，浏览器就会开始渲染资源。</p>
+<p>其中内核包含两部分(目前的说法)，js引擎和渲染引擎，js引擎顾名思义就是用于处理js代码的引擎，而渲染引擎则是用于绘制页面的引擎，两者都是单独的线程，而这样代表了两者只能同时运行一个，所以在head标签内添加script标签会阻塞代码运行，在最老的浏览器里面，甚至有一些只拥有渲染引擎的浏览器。</p>
+<p>在渲染资源的开端，浏览器会将HTML和CSS分开处理，首先会将HTML处理为DOM树(可以理解为一个对象)，树是数据结构的一种，这样也方便后续的操作。在形成DOM树后，CSS代码也会被逐步解析，形成CSSOM树，对应DOM上面的一个个节点，两者都处理完成后，引擎将其合并，形成render tree，所有的步骤都有大量的优化，而chrome浏览器比Firefox快就是因为这些点(我猜的)，形成render tree后引擎开始绘制，这个步骤会被某些特殊的事件延迟，常规做法是禁止延迟的，绘制会在内存里面形成位图，即我们所能看见的部分的像素点位置和颜色，随后再显示在屏幕上。到此用户便可以看见页面元素了，通常用户体验感受最深刻的也是这一部分。</p>
+<p>因为优化用户体验的原因，一般主流网站会在位图描绘完毕后加载JavaScript代码，而JS代码里面也存在很多获取DOM元素的方法和事件，所以放在此处也是最合适的选择。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>虽然过程并不多，但实际上浏览器内部对此进行了大量的优化，也限于我水平的因素，不能了解到更多底层的知识，不过这一块的知识是相当深厚的，值得大量的WEB应用开发者去推敲和研究。</p>
 
         </div>
 
@@ -196,7 +200,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-02-26T08:16:20.850Z" itemprop="dateUpdated">2019-02-26 16:16:20</time>
+    Last updated: <time datetime="2019-02-26T08:37:58.116Z" itemprop="dateUpdated">2019-02-26 16:37:58</time>
 </span><br>
 
 
