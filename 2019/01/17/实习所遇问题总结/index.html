@@ -20,19 +20,19 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="">
-    <meta name="description" content="一个向全能努力的前端工程师">
-<meta name="keywords" content="smart">
+    <meta name="keywords" content="日常问题">
+    <meta name="description" content="1.代码命名规范和注释虽然这个问题经常在提，但是它还是发生了，说一说我的感受： 命名一定要足够清晰，比如该组件是登录页面下的username输入窗口，可以命名为login_UsernameInput，因为公司项目是多人合作，阅读代码需要消耗不少的时间成本，所以要尽可能的命名为能够一眼就看得懂得单词或者语句。 公司必须要有自己的一套代码规范的方案，无论是驼峰命名还是用‘_’隔开，而且需要建立起完整的">
+<meta name="keywords" content="日常问题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="实习所遇问题总结">
 <meta property="og:url" content="http://yoursite.com/2019/01/17/实习所遇问题总结/index.html">
 <meta property="og:site_name" content="wintercomming的博客">
-<meta property="og:description" content="一个向全能努力的前端工程师">
+<meta property="og:description" content="1.代码命名规范和注释虽然这个问题经常在提，但是它还是发生了，说一说我的感受： 命名一定要足够清晰，比如该组件是登录页面下的username输入窗口，可以命名为login_UsernameInput，因为公司项目是多人合作，阅读代码需要消耗不少的时间成本，所以要尽可能的命名为能够一眼就看得懂得单词或者语句。 公司必须要有自己的一套代码规范的方案，无论是驼峰命名还是用‘_’隔开，而且需要建立起完整的">
 <meta property="og:locale" content="chinese">
-<meta property="og:updated_time" content="2019-01-17T07:18:02.083Z">
+<meta property="og:updated_time" content="2019-02-26T11:17:12.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实习所遇问题总结">
-<meta name="twitter:description" content="一个向全能努力的前端工程师">
+<meta name="twitter:description" content="1.代码命名规范和注释虽然这个问题经常在提，但是它还是发生了，说一说我的感受： 命名一定要足够清晰，比如该组件是登录页面下的username输入窗口，可以命名为login_UsernameInput，因为公司项目是多人合作，阅读代码需要消耗不少的时间成本，所以要尽可能的命名为能够一眼就看得懂得单词或者语句。 公司必须要有自己的一套代码规范的方案，无论是驼峰命名还是用‘_’隔开，而且需要建立起完整的">
     
         <link rel="alternate" type="application/atom+xml" title="wintercomming的博客" href="/atom.xml">
     
@@ -119,7 +119,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -155,6 +155,13 @@
 
 <div class="container body-wrap">
     
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-代码命名规范和注释"><span class="post-toc-number">1.</span> <span class="post-toc-text">1.代码命名规范和注释</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-函数和组件可复用的重要性"><span class="post-toc-number">2.</span> <span class="post-toc-text">2.函数和组件可复用的重要性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-当UI库或其他功能组件无法达到预期目的应该怎么办？"><span class="post-toc-number">3.</span> <span class="post-toc-text">3.当UI库或其他功能组件无法达到预期目的应该怎么办？</span></a></li></ol>
+        </nav>
+    </aside>
+
 
 <article id="post-实习所遇问题总结" class="post-article article-type-post fade" itemprop="blogPost">
 
@@ -174,7 +181,16 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            
+            <h2 id="1-代码命名规范和注释"><a href="#1-代码命名规范和注释" class="headerlink" title="1.代码命名规范和注释"></a>1.代码命名规范和注释</h2><p>虽然这个问题经常在提，但是它还是发生了，说一说我的感受：</p>
+<p>命名一定要足够清晰，比如该组件是登录页面下的username输入窗口，可以命名为login_UsernameInput，因为公司项目是多人合作，阅读代码需要消耗不少的时间成本，所以要尽可能的命名为能够一眼就看得懂得单词或者语句。</p>
+<p>公司必须要有自己的一套代码规范的方案，无论是驼峰命名还是用‘_’隔开，而且需要建立起完整的code review制度，特别是对于TOC项目，有很多组件在各个项目之间甚至跨平台或者产品迭代都会复用，如果在开发中代码规范不够严谨，会造成一定的误解，开发效率也会降低，甚至会遇到找不到变量，变量名重复等等问题。</p>
+<p>强迫症患者可以忽视以上信息</p>
+<h2 id="2-函数和组件可复用的重要性"><a href="#2-函数和组件可复用的重要性" class="headerlink" title="2.函数和组件可复用的重要性"></a>2.函数和组件可复用的重要性</h2><p>我在刚开始编写业务复杂的页面时，会选择直接上手，一开始的理解是这样：</p>
+<p>现在有一个业务 六个输入框都调用同样函数，自然会将函数写为一个。</p>
+<p>但是实际开发中往往会遇到以下问题：</p>
+<p>六个输入框中，均需要验证输入字符是否符合规范，他们都需要验证是否含有空格，其中1、4要验证是否含有数字，2、5要验证是否含有小写字母，3、6要验证是否含有大写字母，而1不仅需要验证数字，还要验证小写字母，等等等等等等</p>
+<p>此类问题数不胜数，不仅是函数之间的问题，很可能就是子组件的问题，甚至页面区块的问题，在遇到此类问题时，一定要舍得下时间先分析代码的拆分，哪些是可以组合复用的，哪些是独立执行的，这样写出来的代码不仅条理清晰而且体积小，复用性高，会节省很多的无谓搬砖劳动，实际上归其本质jQuery、Lodash、underscore等等js库最初也是编写者为了代码的简洁复用创造而出，看似并不起眼的问题实际上能造成很大的影响</p>
+<h2 id="3-当UI库或其他功能组件无法达到预期目的应该怎么办？"><a href="#3-当UI库或其他功能组件无法达到预期目的应该怎么办？" class="headerlink" title="3.当UI库或其他功能组件无法达到预期目的应该怎么办？"></a>3.当UI库或其他功能组件无法达到预期目的应该怎么办？</h2>
         </div>
 
         <blockquote class="post-copyright">
@@ -182,7 +198,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-01-17T07:18:02.083Z" itemprop="dateUpdated">2019-01-17 15:18:02</time>
+    最終更新：<time datetime="2019-02-26T11:17:12.195Z" itemprop="dateUpdated">2019-02-26 19:17:12</time>
 </span><br>
 
 
@@ -208,6 +224,8 @@
 
         <div class="post-footer">
             
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日常问题/">日常问题</a></li></ul>
+
 
             
 <div class="page-share-wrap">
@@ -356,7 +374,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">
